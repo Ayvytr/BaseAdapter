@@ -1,4 +1,4 @@
-package com.ayvytr.baseadapter;
+package com.base.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -7,12 +7,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * Created by zhy on 16/4/9.
+ * Created by Jason on 2018/8/14.
  */
 public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     protected static final int TYPE_DATA = 0;
@@ -24,8 +23,6 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     protected ItemViewDelegateManager<T> mItemViewDelegateManager;
     protected OnItemClickListener<T> mOnItemClickListener;
     protected OnItemLongClickListener<T> mOnItemLongClickListener;
-
-    protected boolean isItemAnimEnabled;
 
     public MultiItemTypeAdapter(Context context, List<T> list) {
         mContext = context;
@@ -48,6 +45,7 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         return mItemViewDelegateManager.getItemViewType(mList.get(position), position);
     }
 
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemViewDelegate<T> itemViewDelegate = mItemViewDelegateManager
@@ -67,7 +65,7 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
             @Override
             public void onClick(View v) {
                 if(mOnItemClickListener != null) {
-                    int position = viewHolder.getBindingAdapterPosition();
+                    int position = viewHolder.getAdapterPosition();
                     mOnItemClickListener.onItemClick(viewHolder, mList.get(position), position);
                 }
             }
@@ -77,7 +75,7 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
             @Override
             public boolean onLongClick(View v) {
                 if(mOnItemLongClickListener != null) {
-                    int position = viewHolder.getBindingAdapterPosition();
+                    int position = viewHolder.getAdapterPosition();
                     return mOnItemLongClickListener
                             .onItemLongClick(viewHolder, mList.get(position), position);
                 }
@@ -94,8 +92,8 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position,
             @NonNull List<Object> payloads) {
-        mItemViewDelegateManager.convert(holder, getItem(position),
-                holder.getBindingAdapterPosition(), payloads);
+        mItemViewDelegateManager.convert(holder, getItem(position), holder.getAdapterPosition(),
+                payloads);
     }
 
     @Override
@@ -108,111 +106,76 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         return mList;
     }
 
+    public void setData(List<T> list) {
+        if(list == null) {
+            list = new ArrayList<>(0);
+        }
+        mList.clear();
+        mList = list;
+    }
+
     public boolean isEmpty() {
         return mList.isEmpty();
     }
 
-    public void updateList(List<T> list) {
-        int oldCount = mList.size();
-        mList.clear();
-        mList.addAll(list);
-        if(isItemAnimEnabled) {
-            if(oldCount == 0) {
-                if(!list.isEmpty()) {
-                    notifyItemRangeInserted(0, list.size());
-                }
-            } else {
-                int newCount = list.size();
-                if(newCount == 0) {
-                    notifyItemRangeRemoved(0, oldCount);
-                } else {
-                    if(newCount == oldCount) {
-                        notifyItemRangeChanged(0, newCount);
-                    } else if(newCount < oldCount) {
-                        notifyItemRangeChanged(0, newCount);
-                        notifyItemRangeRemoved(newCount, oldCount);
-                    } else {
-                        notifyItemRangeChanged(0, oldCount);
-                        notifyItemRangeInserted(oldCount, newCount);
-                    }
-                }
-            }
-        } else {
-            notifyDataSetChanged();
-        }
-    }
-
-    public void add(@NonNull T t) {
-        add(mList.size(), t);
-    }
-
-    public void add(@IntRange(from = 0) int index, @NonNull T t) {
-        mList.add(index, t);
-
-        if(isItemAnimEnabled) {
-            notifyItemInserted(index);
-        } else {
-            notifyDataSetChanged();
-        }
-    }
-
-    public void add(@NonNull List<T> list) {
-        add(mList.size(), list);
-    }
-
-    public void add(@IntRange(from = 0) int index, List<T> list) {
-        if(list != null && !list.isEmpty()) {
-            mList.addAll(index, list);
-            if(isItemAnimEnabled) {
-                notifyItemRangeInserted(index, index + list.size());
-            } else {
-                notifyDataSetChanged();
-            }
-        }
-    }
-
-    public void remove(@NonNull T t) {
-        int i = mList.indexOf(t);
-        boolean removed = mList.remove(t);
-        if(removed) {
-            if(isItemAnimEnabled) {
-                notifyItemRemoved(i);
-            } else {
-                notifyDataSetChanged();
-            }
-        }
-    }
-
-    public void remove(@IntRange(from = 0) int index) {
-        if(mList.isEmpty()) {
+    public void updateList(ArrayList<T> list) {
+        if(list == null) {
             return;
         }
+        mList = list;
+        notifyDataSetChanged();
+    }
 
-        mList.remove(index);
-        if(isItemAnimEnabled) {
-            notifyItemRemoved(index);
-        } else {
-            notifyDataSetChanged();
+    public void updateList(List<T> list) {
+        if(list == null) {
+            list = new ArrayList<>();
         }
+        mList.clear();
+        mList.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public void addList(ArrayList<T> list) {
+        mList.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public void addList(List<T> list) {
+        mList.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    public void addFirst(T entity) {
+        mList.add(0, entity);
+        notifyDataSetChanged();
+    }
+
+    public void addFirstList(List<T> list) {
+        mList.addAll(0, list);
+        notifyDataSetChanged();
+    }
+
+    public void addList(T t) {
+        mList.add(t);
+        notifyDataSetChanged();
+    }
+
+    public void removeList(T t) {
+        mList.remove(t);
+        notifyDataSetChanged();
+    }
+
+    public void removeList(int t) {
+        mList.remove(t);
+        notifyDataSetChanged();
     }
 
     public void clear() {
-        if(isEmpty()) {
-            return;
-        }
-
-        int count = mList.size();
         mList.clear();
-        if(count > 0) {
-            if(isItemAnimEnabled) {
-                notifyItemRangeRemoved(0, count);
-            } else {
-                notifyDataSetChanged();
-            }
-        }
+        notifyDataSetChanged();
     }
 
-    public T getItem(@IntRange(from = 0) int position) {
+    public T getItem(int position) {
         return mList.get(position);
     }
 
@@ -239,16 +202,9 @@ public class MultiItemTypeAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
         this.mOnItemLongClickListener = onItemLongClickListener;
     }
 
-    public boolean isItemAnimEnabled() {
-        return isItemAnimEnabled;
-    }
-
-    public void setItemAnimEnabled(boolean itemAnimEnabled) {
-        isItemAnimEnabled = itemAnimEnabled;
-    }
-
     public interface OnItemClickListener<T> {
         void onItemClick(RecyclerView.ViewHolder holder, T t, int position);
+//        boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position);
     }
 
     public interface OnItemLongClickListener<T> {

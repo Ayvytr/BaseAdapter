@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--通用对话框属性-->
+
+    <!--背景色-->
+    <attr name="commonDialogBackground" format="color" />
+    <!--标题字体大小-->
+    <attr name="commonDialogTitleTextSize" format="dimension" />
+    <!--标题字体颜色-->
+    <attr name="commonDialogTitleTextColor" format="color" />
+    <!--内容字体大小-->
+    <attr name="commonDialogContentTextSize" format="dimension" />
+    <!--内容字体颜色-->
+    <attr name="commonDialogContentTextColor" format="color" />
+    <!--确认按钮背景色-->
+    <attr name="commonDialogBtnPositiveBackground" format="color|reference" />
+    <!--取消按钮背景色-->
+    <attr name="commonDialogBtnNegativeBackground" format="color|reference" />
+    <!--按钮字体大小-->
+    <attr name="commonDialogBtnTextSize" format="dimension" />
+    <!--确认按钮字体颜色-->
+    <attr name="commonDialogBtnPositiveTextColor" format="color|reference" />
+    <!--取消按钮字体颜色-->
+    <attr name="commonDialogBtnNegativeTextColor" format="color|reference" />
+
+
+    <!--*******************************************这是一道华丽的分割线************************************-->
+
+    <!--进度框属性-->
+
+    <!--msg字体颜色-->
+    <attr name="commonProgressDialogMsgTextColor" format="color|reference" />
+    <!--msg字体大小-->
+    <attr name="commonProgressDialogTextSize" format="dimension" />
+    <!--ProgressBar动画-->
+    <attr name="commonProgressDialogProgressDrawable" format="reference" />
+    <!--ProgressDialog中ProgressBar的大小,宽高相同-->
+    <attr name="commonProgressDialogProgressWidth" format="dimension" />
+    <!--ProgressDialog中ProgressBar外框的大小,宽高相同-->
+    <attr name="commonProgressDialogProgressContainerWidth" format="dimension" />
+    <!--ProgressDialog中文本的底部间距-->
+    <attr name="commonProgressDialogBottomSpace" format="dimension" />
+</resources>
