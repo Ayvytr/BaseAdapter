@@ -1,98 +1,90 @@
-package com.ayvytr.baseadapter;
+package com.ayvytr.baseadapter
 
-import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.collection.SparseArrayCompat;
-
+import androidx.collection.SparseArrayCompat
 
 /**
  * Created by zhy on 16/6/22.
  */
-public class ItemViewDelegateManager<T> {
-    SparseArrayCompat<ItemViewDelegate<T>> delegates = new SparseArrayCompat();
+class ItemViewDelegateManager<T> {
+    var delegates: SparseArrayCompat<ItemViewDelegate<T>> = SparseArrayCompat<ItemViewDelegate<T>>()
+    val itemViewDelegateCount: Int
+        get() = delegates.size()
 
-    public int getItemViewDelegateCount() {
-        return delegates.size();
+    fun addDelegate(delegate: ItemViewDelegate<T>): ItemViewDelegateManager<T> {
+        delegates.put(0, delegate)
+        return this
     }
 
-    public ItemViewDelegateManager<T> addDelegate(@NonNull ItemViewDelegate<T> delegate) {
-        if(delegate != null) {
-            delegates.put(0, delegate);
+    fun addDelegate(viewType: Int, delegate: ItemViewDelegate<T>): ItemViewDelegateManager<T> {
+        if (delegates[viewType] == null) {
+            ("An ItemViewDelegate is already registered for the viewType = "
+                    + viewType
+                    + ". Already registered ItemViewDelegate is "
+                    + delegates[viewType])
         }
-        return this;
+        delegates.put(viewType, delegate)
+        return this
     }
 
-    public ItemViewDelegateManager<T> addDelegate(int viewType, ItemViewDelegate<T> delegate) {
-        if(delegates.get(viewType) != null) {
-            throw new IllegalArgumentException(
-                    "An ItemViewDelegate is already registered for the viewType = "
-                            + viewType
-                            + ". Already registered ItemViewDelegate is "
-                            + delegates.get(viewType));
+    fun removeDelegate(delegate: ItemViewDelegate<T>?): ItemViewDelegateManager<T> {
+        if (delegate == null) {
+            throw NullPointerException("ItemViewDelegate is null")
         }
-        delegates.put(viewType, delegate);
-        return this;
+        val indexToRemove = delegates.indexOfValue(delegate)
+        if (indexToRemove >= 0) {
+            delegates.removeAt(indexToRemove)
+        }
+        return this
     }
 
-    public ItemViewDelegateManager<T> removeDelegate(ItemViewDelegate<T> delegate) {
-        if(delegate == null) {
-            throw new NullPointerException("ItemViewDelegate is null");
+    fun removeDelegate(itemType: Int): ItemViewDelegateManager<T> {
+        val indexToRemove = delegates.indexOfKey(itemType)
+        if (indexToRemove >= 0) {
+            delegates.removeAt(indexToRemove)
         }
-        int indexToRemove = delegates.indexOfValue(delegate);
-
-        if(indexToRemove >= 0) {
-            delegates.removeAt(indexToRemove);
-        }
-        return this;
+        return this
     }
 
-    public ItemViewDelegateManager<T> removeDelegate(int itemType) {
-        int indexToRemove = delegates.indexOfKey(itemType);
-
-        if(indexToRemove >= 0) {
-            delegates.removeAt(indexToRemove);
-        }
-        return this;
-    }
-
-    public int getItemViewType(T item, int position) {
-        int delegatesCount = delegates.size();
-        for(int i = delegatesCount - 1; i >= 0; i--) {
-            ItemViewDelegate<T> delegate = delegates.valueAt(i);
-            if(delegate.isForViewType(item, position)) {
-                return delegates.keyAt(i);
+    fun getItemViewType(item: T, position: Int): Int {
+        val delegatesCount = delegates.size()
+        for (i in delegatesCount - 1 downTo 0) {
+            val delegate = delegates.valueAt(i)
+            delegate?.apply {
+                if (isForViewType(item, position)) {
+                    return delegates.keyAt(i)
+                }
             }
         }
-        throw new IllegalArgumentException(
-                "No ItemViewDelegate added that matches position=" + position + " in data source");
+        throw IllegalArgumentException(
+            "No ItemViewDelegate added that matches position=$position in data source")
     }
 
-    public void convert(ViewHolder holder, T item, int position,
-            List<Object> payloads) {
-        int delegatesCount = delegates.size();
-        for(int i = 0; i < delegatesCount; i++) {
-            ItemViewDelegate<T> delegate = delegates.valueAt(i);
-
-            if(delegate.isForViewType(item, position)) {
-                delegate.convert(holder, item, position, payloads);
-                return;
+    fun convert(holder: ViewHolder, item: T, position: Int,
+                payloads: List<Any>) {
+        val delegatesCount = delegates.size()
+        for (i in 0 until delegatesCount) {
+            val delegate = delegates.valueAt(i)
+            delegate?.apply {
+                if (isForViewType(item, position)) {
+                    delegate.convert(holder, item, position, payloads)
+                    return
+                }
             }
         }
-        throw new IllegalArgumentException(
-                "No ItemViewDelegateManager added that matches position=" + position + " in data source");
+        throw IllegalArgumentException(
+            "No ItemViewDelegateManager added that matches position=$position in data source")
     }
 
-
-    public ItemViewDelegate<T> getItemViewDelegate(int viewType) {
-        return delegates.get(viewType);
+    fun getItemViewDelegate(viewType: Int): ItemViewDelegate<T>? {
+        return delegates[viewType]
     }
 
-    public int getItemViewLayoutId(int viewType) {
-        return getItemViewDelegate(viewType).getItemViewLayoutId();
+    fun getItemViewLayoutId(viewType: Int): Int {
+        val itemViewDelegate = getItemViewDelegate(viewType)
+        return itemViewDelegate?.itemViewLayoutId() ?: 0
     }
 
-    public int getItemViewType(ItemViewDelegate itemViewDelegate) {
-        return delegates.indexOfValue(itemViewDelegate);
+    fun getItemViewType(itemViewDelegate: ItemViewDelegate<T>): Int {
+        return delegates.indexOfValue(itemViewDelegate)
     }
 }

@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SmartRefreshLayout smartRefreshLayout;
     private RecyclerView rv;
-//    private DataAdapter<Bean> adapter;
+//    private DataAdapter adapter;
     private DataEmptyAdapter adapter;
     private View tvClear;
     private View tvAdd;

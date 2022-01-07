@@ -7,18 +7,26 @@ import com.ayvytr.baseadapter.ViewHolder;
 import com.example.myapplication.R;
 import com.example.myapplication.bean.Bean;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 /**
  * @author Administrator
  */
 public class DataEmptyAdapter extends EmptyAdapter<Bean> {
-    public DataEmptyAdapter(Context context, int layoutId, int emptyLayoutId) {
+    public DataEmptyAdapter(@NotNull Context context, int layoutId, int emptyLayoutId) {
         super(context, layoutId, emptyLayoutId);
     }
 
     @Override
-    protected void onBind(ViewHolder holder, Bean bean, int position, List<Object> payloads) {
+    protected void onBind(ViewHolder holder, Bean bean, int position, List payloads) {
         holder.setText(R.id.tv, bean.text);
+    }
+
+
+    @Override
+    public void onBindEmptyView(@NotNull ViewHolder holder) {
+
     }
 }

@@ -1,246 +1,229 @@
-package com.ayvytr.baseadapter;
+package com.ayvytr.baseadapter
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.text.util.Linkify;
-import android.util.SparseArray;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.widget.Checkable;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RatingBar;
-import android.widget.TextView;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
-import androidx.annotation.StringRes;
-import androidx.recyclerview.widget.RecyclerView;
+import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Paint
+import android.graphics.Typeface
+import android.graphics.drawable.Drawable
+import android.os.Build
+import android.text.util.Linkify
+import android.util.SparseArray
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.widget.*
+import androidx.annotation.*
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Created by Jason on 2018/8/14.
  */
-public class ViewHolder extends RecyclerView.ViewHolder {
-    private SparseArray<View> mViews;
-    private View mConvertView;
-    private Context mContext;
+class ViewHolder(private val mContext: Context, val convertView: View):
+    RecyclerView.ViewHolder(convertView) {
+    private val mViews: SparseArray<View?>
 
-    public ViewHolder(Context context, View itemView) {
-        super(itemView);
-        mContext = context;
-        mConvertView = itemView;
-        mViews = new SparseArray<View>();
-    }
-
-    public static ViewHolder createViewHolder(Context context, View itemView) {
-        ViewHolder holder = new ViewHolder(context, itemView);
-        return holder;
-    }
-
-    public static ViewHolder createViewHolder(Context context,
-            ViewGroup parent, int layoutId) {
-        View itemView = LayoutInflater.from(context).inflate(layoutId, parent,
-                false);
-        ViewHolder holder = new ViewHolder(context, itemView);
-        return holder;
-    }
-
-    public <T extends View> T getView(@IdRes int viewId) {
-        View view = mViews.get(viewId);
-        if(view == null) {
-            view = mConvertView.findViewById(viewId);
-            mViews.put(viewId, view);
+    fun <T: View?> getView(@IdRes viewId: Int): T? {
+        var view = mViews[viewId]
+        if (view == null) {
+            view = convertView.findViewById(viewId)
+            mViews.put(viewId, view)
         }
-        return (T) view;
+        return view as T?
     }
 
-    public View getConvertView() {
-        return mConvertView;
+    fun setText(@IdRes viewId: Int, @StringRes textId: Int): ViewHolder {
+        val tv = getView<TextView>(viewId)!!
+        tv.setText(textId)
+        return this
     }
 
-    public ViewHolder setText(@IdRes int viewId, @StringRes int textId) {
-        TextView tv = getView(viewId);
-        tv.setText(textId);
-        return this;
+    fun setText(@IdRes viewId: Int, text: CharSequence?): ViewHolder {
+        val tv = getView<TextView>(viewId)!!
+        tv.text = text
+        return this
     }
 
-    public ViewHolder setText(@IdRes int viewId, CharSequence text) {
-        TextView tv = getView(viewId);
-        tv.setText(text);
-        return this;
+    fun setImage(@IdRes viewId: Int, resId: Int): ViewHolder {
+        val view = getView<ImageView>(viewId)!!
+        view.setImageResource(resId)
+        return this
     }
 
-    public ViewHolder setImage(@IdRes int viewId, int resId) {
-        ImageView view = getView(viewId);
-        view.setImageResource(resId);
-        return this;
+    fun setImage(@IdRes viewId: Int, bitmap: Bitmap?): ViewHolder {
+        val view = getView<ImageView>(viewId)!!
+        view.setImageBitmap(bitmap)
+        return this
     }
 
-    public ViewHolder setImage(@IdRes int viewId, Bitmap bitmap) {
-        ImageView view = getView(viewId);
-        view.setImageBitmap(bitmap);
-        return this;
+    fun setImage(@IdRes viewId: Int, drawable: Drawable?): ViewHolder {
+        val view = getView<ImageView>(viewId)!!
+        view.setImageDrawable(drawable)
+        return this
     }
 
-    public ViewHolder setImage(@IdRes int viewId, Drawable drawable) {
-        ImageView view = getView(viewId);
-        view.setImageDrawable(drawable);
-        return this;
+    fun setBackgroundColor(@IdRes viewId: Int, @ColorInt color: Int): ViewHolder {
+        val view = getView<View>(viewId)!!
+        view.setBackgroundColor(color)
+        return this
     }
 
-    public ViewHolder setBackgroundColor(@IdRes int viewId, @ColorInt int color) {
-        View view = getView(viewId);
-        view.setBackgroundColor(color);
-        return this;
+    fun setBackgroundRes(@IdRes viewId: Int, @DrawableRes backgroundRes: Int): ViewHolder {
+        val view = getView<View>(viewId)!!
+        view.setBackgroundResource(backgroundRes)
+        return this
     }
 
-    public ViewHolder setBackgroundRes(@IdRes int viewId, @DrawableRes int backgroundRes) {
-        View view = getView(viewId);
-        view.setBackgroundResource(backgroundRes);
-        return this;
+    fun setTextColor(@IdRes viewId: Int, @ColorInt textColor: Int): ViewHolder {
+        val view = getView<TextView>(viewId)!!
+        view.setTextColor(textColor)
+        return this
     }
 
-    public ViewHolder setTextColor(@IdRes int viewId, @ColorInt int textColor) {
-        TextView view = getView(viewId);
-        view.setTextColor(textColor);
-        return this;
-    }
-
-    public ViewHolder setTextColorRes(@IdRes int viewId, @ColorRes int textColorRes) {
-        TextView view = getView(viewId);
-        view.setTextColor(mContext.getResources().getColor(textColorRes));
-        return this;
+    fun setTextColorRes(@IdRes viewId: Int, @ColorRes textColorRes: Int): ViewHolder {
+        val view = getView<TextView>(viewId)!!
+        view.setTextColor(mContext.resources.getColor(textColorRes))
+        return this
     }
 
     @SuppressLint("NewApi")
-    public ViewHolder setAlpha(@IdRes int viewId, float value) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getView(viewId).setAlpha(value);
+    fun setAlpha(@IdRes viewId: Int, value: Float): ViewHolder {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            getView<View>(viewId)!!.alpha = value
         } else {
             // Pre-honeycomb hack to set Alpha value
-            AlphaAnimation alpha = new AlphaAnimation(value, value);
-            alpha.setDuration(0);
-            alpha.setFillAfter(true);
-            getView(viewId).startAnimation(alpha);
+            val alpha = AlphaAnimation(value, value)
+            alpha.duration = 0
+            alpha.fillAfter = true
+            getView<View>(viewId)!!.startAnimation(alpha)
         }
-        return this;
+        return this
     }
 
-    public ViewHolder setVisible(@IdRes int viewId, int visible) {
-        View view = getView(viewId);
-        view.setVisibility(visible);
-        return this;
+    fun setVisible(@IdRes viewId: Int, visible: Int): ViewHolder {
+        val view = getView<View>(viewId)!!
+        view.visibility = visible
+        return this
     }
 
-    public ViewHolder linkify(@IdRes int viewId) {
-        TextView view = getView(viewId);
-        Linkify.addLinks(view, Linkify.ALL);
-        return this;
+    fun linkify(@IdRes viewId: Int): ViewHolder {
+        val view = getView<TextView>(viewId)!!
+        Linkify.addLinks(view, Linkify.ALL)
+        return this
     }
 
-    public ViewHolder setTypeface(Typeface typeface, @IdRes int... viewIds) {
-        for(int viewId : viewIds) {
-            TextView view = getView(viewId);
-            view.setTypeface(typeface);
-            view.setPaintFlags(view.getPaintFlags() | Paint.SUBPIXEL_TEXT_FLAG);
+    fun setTypeface(typeface: Typeface?, @IdRes vararg viewIds: Int): ViewHolder {
+        for (viewId in viewIds) {
+            val view = getView<TextView>(viewId)!!
+            view.typeface = typeface
+            view.paintFlags = view.paintFlags or Paint.SUBPIXEL_TEXT_FLAG
         }
-        return this;
+        return this
     }
 
-    public ViewHolder setProgress(@IdRes int viewId, int progress) {
-        ProgressBar view = getView(viewId);
-        view.setProgress(progress);
-        return this;
+    fun setProgress(@IdRes viewId: Int, progress: Int): ViewHolder {
+        val view = getView<ProgressBar>(viewId)!!
+        view.progress = progress
+        return this
     }
 
-    public ViewHolder setProgress(@IdRes int viewId, int progress, int max) {
-        ProgressBar view = getView(viewId);
-        view.setMax(max);
-        view.setProgress(progress);
-        return this;
+    fun setProgress(@IdRes viewId: Int, progress: Int, max: Int): ViewHolder {
+        val view = getView<ProgressBar>(viewId)!!
+        view.max = max
+        view.progress = progress
+        return this
     }
 
-    public ViewHolder setMax(@IdRes int viewId, int max) {
-        ProgressBar view = getView(viewId);
-        view.setMax(max);
-        return this;
+    fun setMax(@IdRes viewId: Int, max: Int): ViewHolder {
+        val view = getView<ProgressBar>(viewId)!!
+        view.max = max
+        return this
     }
 
-    public ViewHolder setRating(@IdRes int viewId, float rating) {
-        RatingBar view = getView(viewId);
-        view.setRating(rating);
-        return this;
+    fun setRating(@IdRes viewId: Int, rating: Float): ViewHolder {
+        val view = getView<RatingBar>(viewId)!!
+        view.rating = rating
+        return this
     }
 
-    public ViewHolder setRating(@IdRes int viewId, float rating, int max) {
-        RatingBar view = getView(viewId);
-        view.setMax(max);
-        view.setRating(rating);
-        return this;
+    fun setRating(@IdRes viewId: Int, rating: Float, max: Int): ViewHolder {
+        val view = getView<RatingBar>(viewId)!!
+        view.max = max
+        view.rating = rating
+        return this
     }
 
-    public ViewHolder setTag(@IdRes int viewId, Object tag) {
-        View view = getView(viewId);
-        view.setTag(tag);
-        return this;
+    fun setTag(@IdRes viewId: Int, tag: Any?): ViewHolder {
+        val view = getView<View>(viewId)!!
+        view.tag = tag
+        return this
     }
 
-    public ViewHolder setTag(@IdRes int viewId, int key, Object tag) {
-        View view = getView(viewId);
-        view.setTag(key, tag);
-        return this;
+    fun setTag(@IdRes viewId: Int, key: Int, tag: Any?): ViewHolder {
+        val view = getView<View>(viewId)!!
+        view.setTag(key, tag)
+        return this
     }
 
-    public ViewHolder setChecked(@IdRes int viewId, boolean checked) {
-        Checkable view = (Checkable) getView(viewId);
-        view.setChecked(checked);
-        return this;
+    fun setChecked(@IdRes viewId: Int, checked: Boolean): ViewHolder {
+        val view = getView<View>(viewId) as Checkable
+        view.isChecked = checked
+        return this
     }
 
-    public ViewHolder setSelected(@IdRes int viewId, boolean isSelected) {
-        View view = getView(viewId);
-        view.setSelected(isSelected);
-        return this;
+    fun setSelected(@IdRes viewId: Int, isSelected: Boolean): ViewHolder {
+        val view = getView<View>(viewId)!!
+        view.isSelected = isSelected
+        return this
     }
 
-    public ViewHolder setOnClickListener(@IdRes int viewId,
-            View.OnClickListener listener) {
-        View view = getView(viewId);
-        view.setOnClickListener(listener);
-        return this;
+    fun setOnClickListener(@IdRes viewId: Int,
+                           listener: View.OnClickListener?): ViewHolder {
+        val view = getView<View>(viewId)!!
+        view.setOnClickListener(listener)
+        return this
     }
 
-    public ViewHolder setOnTouchListener(@IdRes int viewId,
-            View.OnTouchListener listener) {
-        View view = getView(viewId);
-        view.setOnTouchListener(listener);
-        return this;
+    fun setOnTouchListener(@IdRes viewId: Int,
+                           listener: View.OnTouchListener?): ViewHolder {
+        val view = getView<View>(viewId)!!
+        view.setOnTouchListener(listener)
+        return this
     }
 
-    public ViewHolder setOnLongClickListener(@IdRes int viewId,
-            View.OnLongClickListener listener) {
-        View view = getView(viewId);
-        view.setOnLongClickListener(listener);
-        return this;
+    fun setOnLongClickListener(@IdRes viewId: Int,
+                               listener: View.OnLongClickListener?): ViewHolder {
+        val view = getView<View>(viewId)!!
+        view.setOnLongClickListener(listener)
+        return this
     }
 
-    public ViewHolder setEnabled(@IdRes int viewId, boolean enabled) {
-        View view = getView(viewId);
-        view.setEnabled(enabled);
-        return this;
+    fun setEnabled(@IdRes viewId: Int, enabled: Boolean): ViewHolder {
+        val view = getView<View>(viewId)!!
+        view.isEnabled = enabled
+        return this
     }
 
-    public void appendText(@IdRes int viewId, CharSequence text) {
-        TextView tv = getView(viewId);
-        tv.append(text);
+    fun appendText(@IdRes viewId: Int, text: CharSequence?) {
+        val tv = getView<TextView>(viewId)!!
+        tv.append(text)
+    }
+
+    companion object {
+        fun createViewHolder(context: Context, itemView: View): ViewHolder {
+            return ViewHolder(context, itemView)
+        }
+
+        fun createViewHolder(context: Context,
+                             parent: ViewGroup?, layoutId: Int): ViewHolder {
+            val itemView = LayoutInflater.from(context).inflate(layoutId, parent,
+                                                                false)
+            return ViewHolder(context, itemView)
+        }
+    }
+
+    init {
+        mViews = SparseArray()
     }
 }

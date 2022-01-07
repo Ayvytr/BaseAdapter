@@ -1,175 +1,149 @@
-package com.ayvytr.baseadapter;
+package com.ayvytr.baseadapter
 
-import android.content.Context;
-
-import com.ayvytr.logger.L;
-
-import java.util.List;
-
-import androidx.annotation.IntRange;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.content.Context
+import androidx.annotation.IntRange
+import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * @author Administrator
  */
-public abstract class EmptyAdapter<T> extends CommonAdapter<T> {
-    private final ItemViewDelegate<T> emptyViewDelegate;
+abstract class EmptyAdapter<T>(context: Context, layoutId: Int, private var emptyLayoutId: Int):
+    CommonAdapter<T>(context, layoutId) {
 
-    private boolean isDataChanged;
+    private val emptyViewDelegate: EmptyItemViewDelegate<T>
 
-    private int emptyLayoutId;
+    private var isDataChanged = false
 
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
+    private var recyclerView: RecyclerView? = null
+    private var layoutManager: RecyclerView.LayoutManager? = null
 
-    private LinearLayoutManager emptyLayoutManager;
+    private val emptyLayoutManager: LinearLayoutManager by lazy {
+        LinearLayoutManager(context)
+    }
 
-    private RecyclerView.AdapterDataObserver emptyAdapterDataObserver;
+    private val emptyAdapterDataObserver: RecyclerView.AdapterDataObserver by lazy {
+        object: RecyclerView.AdapterDataObserver() {
+            override fun onChanged() {
+                isDataChanged = true
 
-    public EmptyAdapter(Context context, int layoutId, int emptyLayoutRes) {
-        super(context, layoutId);
-        this.emptyLayoutId = emptyLayoutRes;
-        if(emptyLayoutRes != 0) {
-            emptyLayoutManager = new LinearLayoutManager(context);
+                val lm = recyclerView!!.layoutManager
+                if (!mList.isEmpty()) {
+                    if (lm !== layoutManager && layoutManager != null) {
+                        recyclerView!!.layoutManager = layoutManager
+                    }
+                } else {
+                    if (lm !== emptyLayoutManager) {
+                        recyclerView!!.layoutManager = emptyLayoutManager
+                    }
+                }
+            }
+
+            override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+                onChanged()
+            }
+
+            override fun onItemRangeChanged(positionStart: Int, itemCount: Int,
+                                            payload: Any?) {
+                onChanged()
+            }
+
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                onChanged()
+            }
+
+            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                onChanged()
+            }
+
+            override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
+                onChanged()
+            }
         }
-        registerDataObserver();
+    }
 
-        emptyViewDelegate = new ItemViewDelegate<T>() {
-            @Override
-            public int getItemViewLayoutId() {
-                return emptyLayoutId;
+    init {
+        emptyViewDelegate = object: EmptyItemViewDelegate<T> {
+            override fun itemViewLayoutId(): Int {
+                return emptyLayoutId
             }
 
             /**
              * @return 空布局必须返回false，不然布局加载异常
              */
-            @Override
-            public boolean isForViewType(T item, int position) {
-                return false;
+            override fun isForViewType(item: T, position: Int): Boolean {
+                return false
             }
 
-            @Override
-            public void convert(ViewHolder holder, T bean, int position, List<Object> payloads) {
-                convertEmptyView(holder);
+            override fun convert(holder: ViewHolder, t: T, position: Int, payloads: List<Any>) {
             }
-        };
-        addItemViewDelegate(MultiItemTypeAdapter.TYPE_EMPTY, emptyViewDelegate);
+
+            override fun convert(holder: ViewHolder) {
+                onBindEmptyView(holder)
+            }
+        }
+        addItemViewDelegate(TYPE_EMPTY, emptyViewDelegate)
+        registerDataObserver()
     }
 
-    public void convertEmptyView(ViewHolder holder) {
+    /**
+     * 重写可对空布局设置点击事情.
+     */
+    abstract fun onBindEmptyView(holder: ViewHolder)
+
+    private fun registerDataObserver() {
+        if (emptyLayoutId == 0) {
+            unregisterDataObserver()
+            return
+        }
+
+        registerAdapterDataObserver(emptyAdapterDataObserver)
     }
 
-    private void registerDataObserver() {
-        if(emptyLayoutId == 0) {
-            unregisterDataObserver();
-            return;
+    override fun getItemViewType(position: Int): Int {
+        if (!super.isEmpty() || emptyLayoutId == 0) {
+            layoutManager = recyclerView!!.layoutManager
+            return super.getItemViewType(position)
         }
-
-        if(emptyAdapterDataObserver == null) {
-            emptyAdapterDataObserver = new RecyclerView.AdapterDataObserver() {
-                @Override
-                public void onChanged() {
-                    isDataChanged = true;
-                    L.e();
-
-                    RecyclerView.LayoutManager lm = recyclerView.getLayoutManager();
-                    if(!mList.isEmpty()) {
-                        if(lm != layoutManager && layoutManager != null) {
-                            recyclerView.setLayoutManager(layoutManager);
-                        }
-                    } else {
-                        if(lm != emptyLayoutManager) {
-                            recyclerView.setLayoutManager(emptyLayoutManager);
-                        }
-                    }
-                }
-
-                @Override
-                public void onItemRangeChanged(int positionStart, int itemCount) {
-                    onChanged();
-                }
-
-                @Override
-                public void onItemRangeChanged(int positionStart, int itemCount,
-                        @Nullable Object payload) {
-                    onChanged();
-                }
-
-                @Override
-                public void onItemRangeInserted(int positionStart, int itemCount) {
-                    onChanged();
-                }
-
-                @Override
-                public void onItemRangeRemoved(int positionStart, int itemCount) {
-                    onChanged();
-                }
-
-                @Override
-                public void onItemRangeMoved(int fromPosition, int toPosition, int itemCount) {
-                    onChanged();
-                }
-            };
-        }
-        registerAdapterDataObserver(emptyAdapterDataObserver);
+        return if (isDataChanged) TYPE_EMPTY else 0
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if(!super.isEmpty() || emptyLayoutId == 0) {
-            layoutManager = recyclerView.getLayoutManager();
-            return super.getItemViewType(position);
-        }
-
-        if(isDataChanged) {
-            return MultiItemTypeAdapter.TYPE_EMPTY;
-        } else {
-            return 0;
-        }
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position,
-            @NonNull List<Object> payloads) {
-        if(!super.isEmpty()) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int,
+                                  payloads: MutableList<Any>) {
+        if (!mList.isEmpty()) {
             mItemViewDelegateManager.convert(holder, getItem(position),
-                    holder.getBindingAdapterPosition(), payloads);
+                                             holder.bindingAdapterPosition, payloads)
         } else {
-            emptyViewDelegate.convert(holder, null, position, payloads);
+            emptyViewDelegate.convert(holder)
         }
     }
 
-    @Override
-    public int getItemCount() {
-        if(!mList.isEmpty() || emptyLayoutId == 0) {
-            return super.getItemCount();
+    override fun getItemCount(): Int {
+        if (!mList.isEmpty() || emptyLayoutId == 0) {
+            return super.getItemCount()
         }
-
-        return isDataChanged ? 1 : 0;
+        return if (isDataChanged) 1 else 0
     }
 
-    @Override
-    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
-        this.recyclerView = recyclerView;
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        this.recyclerView = recyclerView
     }
 
-    @Override
-    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
-        this.recyclerView = null;
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        this.recyclerView = null
     }
 
-    public void clearEmptyLayout() {
-        this.emptyLayoutId = 0;
-        unregisterDataObserver();
+    fun clearEmptyLayout() {
+        emptyLayoutId = 0
+        unregisterDataObserver()
     }
 
-    private void unregisterDataObserver() {
-        if(emptyAdapterDataObserver != null) {
-            unregisterAdapterDataObserver(emptyAdapterDataObserver);
+    private fun unregisterDataObserver() {
+        try {
+            unregisterAdapterDataObserver(emptyAdapterDataObserver)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -177,34 +151,34 @@ public abstract class EmptyAdapter<T> extends CommonAdapter<T> {
      * 涉及空布局必须重写增加item的方法，因为item count=0时，notifyItemRangeInserted，notifyItemInserted
      * 会报错.
      */
-    public void updateList(List<T> list) {
-        int oldCount = mList.size();
-        mList.clear();
-        mList.addAll(list);
-        if(isItemAnimEnabled) {
-            if(oldCount == 0) {
-                if(!list.isEmpty()) {
-                    notifyItemChanged(0);
-                    notifyItemRangeInserted(1, list.size());
+    override fun updateList(list: List<T>) {
+        val oldCount = mList.size
+        mList.clear()
+        mList.addAll(list)
+        if (isItemAnimEnabled) {
+            if (oldCount == 0) {
+                if (!list.isEmpty()) {
+                    notifyItemChanged(0)
+                    notifyItemRangeInserted(1, list.size)
                 }
             } else {
-                int newCount = list.size();
-                if(newCount == 0) {
-                    notifyItemRangeRemoved(0, oldCount);
+                val newCount = list.size
+                if (newCount == 0) {
+                    notifyItemRangeRemoved(0, oldCount)
                 } else {
-                    if(newCount == oldCount) {
-                        notifyItemRangeChanged(0, newCount);
-                    } else if(newCount < oldCount) {
-                        notifyItemRangeChanged(0, newCount);
-                        notifyItemRangeRemoved(newCount, oldCount);
+                    if (newCount == oldCount) {
+                        notifyItemRangeChanged(0, newCount)
+                    } else if (newCount < oldCount) {
+                        notifyItemRangeChanged(0, newCount)
+                        notifyItemRangeRemoved(newCount, oldCount)
                     } else {
-                        notifyItemRangeChanged(0, oldCount);
-                        notifyItemRangeInserted(oldCount, newCount);
+                        notifyItemRangeChanged(0, oldCount)
+                        notifyItemRangeInserted(oldCount, newCount)
                     }
                 }
             }
         } else {
-            notifyDataSetChanged();
+            notifyDataSetChanged()
         }
     }
 
@@ -212,18 +186,17 @@ public abstract class EmptyAdapter<T> extends CommonAdapter<T> {
      * 涉及空布局必须重写增加item的方法，因为item count=0时，notifyItemRangeInserted，notifyItemInserted
      * 会报错.
      */
-    public void add(@IntRange(from = 0) int index, @NonNull T t) {
-        int oldCount = mList.size();
-        mList.add(index, t);
-
-        if(isItemAnimEnabled) {
-            if(oldCount == 0) {
-                notifyItemChanged(0);
+    override fun add(@IntRange(from = 0) index: Int, t: T) {
+        val oldCount = mList.size
+        mList.add(index, t)
+        if (isItemAnimEnabled) {
+            if (oldCount == 0) {
+                notifyItemChanged(0)
             } else {
-                notifyItemInserted(index);
+                notifyItemInserted(index)
             }
         } else {
-            notifyDataSetChanged();
+            notifyDataSetChanged()
         }
     }
 
@@ -231,30 +204,28 @@ public abstract class EmptyAdapter<T> extends CommonAdapter<T> {
      * 涉及空布局必须重写增加item的方法，因为item count=0时，notifyItemRangeInserted，notifyItemInserted
      * 会报错.
      */
-    public void add(@IntRange(from = 0) int index, List<T> list) {
-        if(list != null && !list.isEmpty()) {
-            int oldCount = mList.size();
-            mList.addAll(index, list);
-            if(isItemAnimEnabled) {
-                if(oldCount == 0) {
-                    notifyItemChanged(0);
-                    notifyItemRangeInserted(1, 1 + list.size());
+    override fun add(@IntRange(from = 0) index: Int, list: List<T>) {
+        if (!list.isEmpty()) {
+            val oldCount = mList.size
+            mList.addAll(index, list)
+            if (isItemAnimEnabled) {
+                if (oldCount == 0) {
+                    notifyItemChanged(0)
+                    notifyItemRangeInserted(1, 1 + list.size)
                 } else {
-                    notifyItemRangeInserted(index, index + list.size());
+                    notifyItemRangeInserted(index, index + list.size)
                 }
             } else {
-                notifyDataSetChanged();
+                notifyDataSetChanged()
             }
         }
     }
 
-    public int getEmptyLayoutId() {
-        return emptyLayoutId;
+
+    fun setEmptyLayoutId(@LayoutRes emptyLayoutId: Int) {
+        this.emptyLayoutId = emptyLayoutId
+        registerDataObserver()
+        notifyDataSetChanged()
     }
 
-    public void setEmptyLayoutId(@LayoutRes int emptyLayoutId) {
-        this.emptyLayoutId = emptyLayoutId;
-        registerDataObserver();
-        notifyDataSetChanged();
-    }
 }
