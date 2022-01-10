@@ -7,9 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * @author Administrator
+ * 支持空布局的Adapter，可重写[onBindEmptyView]实现空布局点击事件；使用时要注意：空布局宽高必须是
+ * match parent.
+ * @author Ayvytr ['s GitHub](https://github.com/Ayvytr)
+ * @since 0.1.0
  */
-abstract class EmptyAdapter<T>(context: Context, layoutId: Int, private var emptyLayoutId: Int):
+abstract class EmptyAdapter<T>(context: Context,
+                               @LayoutRes layoutId: Int,
+                               @LayoutRes private var emptyLayoutId: Int):
     CommonAdapter<T>(context, layoutId) {
 
     private val emptyViewDelegate: EmptyItemViewDelegate<T>

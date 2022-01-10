@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
  */
 class ViewHolder(private val mContext: Context, val convertView: View):
     RecyclerView.ViewHolder(convertView) {
-    private val mViews: SparseArray<View?>
+    private val mViews: SparseArray<View?> = SparseArray()
 
     fun <T: View?> getView(@IdRes viewId: Int): T? {
         var view = mViews[viewId]
@@ -89,14 +89,15 @@ class ViewHolder(private val mContext: Context, val convertView: View):
 
     @SuppressLint("NewApi")
     fun setAlpha(@IdRes viewId: Int, value: Float): ViewHolder {
+        val view = getView<View>(viewId)!!
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getView<View>(viewId)!!.alpha = value
+            view.alpha = value
         } else {
             // Pre-honeycomb hack to set Alpha value
             val alpha = AlphaAnimation(value, value)
             alpha.duration = 0
             alpha.fillAfter = true
-            getView<View>(viewId)!!.startAnimation(alpha)
+            view.startAnimation(alpha)
         }
         return this
     }
@@ -211,10 +212,12 @@ class ViewHolder(private val mContext: Context, val convertView: View):
     }
 
     companion object {
+        @JvmStatic
         fun createViewHolder(context: Context, itemView: View): ViewHolder {
             return ViewHolder(context, itemView)
         }
 
+        @JvmStatic
         fun createViewHolder(context: Context,
                              parent: ViewGroup?, layoutId: Int): ViewHolder {
             val itemView = LayoutInflater.from(context).inflate(layoutId, parent,
@@ -223,7 +226,4 @@ class ViewHolder(private val mContext: Context, val convertView: View):
         }
     }
 
-    init {
-        mViews = SparseArray()
-    }
 }

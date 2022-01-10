@@ -11,7 +11,7 @@ abstract class CommonAdapter<T> @JvmOverloads constructor(context: Context,
                                                           list: MutableList<T> = mutableListOf()):
     MultiItemTypeAdapter<T>(context, list) {
 
-    protected abstract fun onBind(holder: ViewHolder, t: T, position: Int, payloads: List<Any>)
+    protected abstract fun onBindView(holder: ViewHolder, t: T, position: Int, payloads: List<Any>)
 
     init {
 
@@ -25,7 +25,7 @@ abstract class CommonAdapter<T> @JvmOverloads constructor(context: Context,
             }
 
             override fun convert(holder: ViewHolder, t: T, position: Int, payloads: List<Any>) {
-                onBind(holder, t, position, payloads)
+                onBindView(holder, t, position, payloads)
             }
 
         })

@@ -18,7 +18,7 @@ public class DataAdapter extends CommonAdapter<Bean> {
     }
 
     @Override
-    protected void onBind(ViewHolder holder, Bean bean, int position, List payloads) {
+    protected void onBindView(ViewHolder holder, Bean bean, int position, List payloads) {
         holder.setText(R.id.tv, bean.text);
     }
 }

@@ -1,7 +1,7 @@
 package com.ayvytr.baseadapter
 
 /**
- * Created by Jason on 2018/8/14.
+ * Created by zhy on 16/4/9.
  */
 interface ItemViewDelegate<T> {
     fun itemViewLayoutId(): Int
