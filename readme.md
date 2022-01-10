@@ -4,17 +4,49 @@
 
 
 
-
+## 引入
 
 ```
-implementation 'com.ayvytr:base-adapter:1.4.1'
+mavenCentral()
+implementation 'io.github.ayvytr:base-adapter:0.1.0'
 ```
 
 
 
-~~jcenter()库废弃，~~
+~~jcenter()库废弃~~
 
 ~~implementation 'com.ayvytr:base-adapter:1.4.1'~~
+
+
+
+## 使用
+
+继承CommonAdapter，`onBindView()` 初始化View，可使用继承支持空布局的EmptyAdapter，可在`onBindEmptyView()`实现空布局点击事件。
+
+
+
+例子：
+
+```java
+public class DataEmptyAdapter extends EmptyAdapter<Bean> {
+    public DataEmptyAdapter(@NotNull Context context, int layoutId, int emptyLayoutId) {
+        super(context, layoutId, emptyLayoutId);
+    }
+
+    @Override
+    protected void onBindView(ViewHolder holder, Bean bean, int position, List payloads) {
+        holder.setText(R.id.tv, bean.text);
+    }
+
+
+    @Override
+    public void onBindEmptyView(@NotNull ViewHolder holder) {
+		//可实现空布局点击事件
+    }
+}
+```
+
+
 
 
 
@@ -26,7 +58,7 @@ implementation 'com.ayvytr:base-adapter:1.4.1'
 
 
 
-## 参考：
+## 参考/感谢：
 
 [https://github.com/hongyangAndroid/baseAdapter](https://github.com/hongyangAndroid/baseAdapter)
 
