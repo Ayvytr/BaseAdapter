@@ -52,6 +52,10 @@ public class DataEmptyAdapter extends EmptyAdapter<Bean> {
 
 ## 更新历史
 
+* 0.1.1
+  * 删除setOnItemClickListener(), setOnItemLongClickListener()
+  * 修改部分变量名称和访问权限
+  * MultiItemTypeAdapter.clear() 取消空判断，防止本来列表是空，EmptyAdapter.clear()之后空布局不显示问题
 * 0.1.0
   * 适配androidx
   * 废弃了Wrapper包装Adapter的做法，增加了`EmptyAdapter`，可继承实现空布局效果

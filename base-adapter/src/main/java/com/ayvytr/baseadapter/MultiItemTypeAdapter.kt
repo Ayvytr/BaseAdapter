@@ -3,19 +3,25 @@ package com.ayvytr.baseadapter
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
 import androidx.annotation.IntRange
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 
 /**
+ * @author Ayvytr ['s GitHub](https://github.com/Ayvytr)
+ * @since 0.1.1 删除setOnItemClickListener(), setOnItemLongClickListener()；修改部分变量名称和访问权限；
+ * 修改[clear]
+ * @since 0.1.0
  * Created by zhy on 16/4/9.
  */
-open class MultiItemTypeAdapter<T>(val context: Context,
-                                   val mList: MutableList<T> = mutableListOf()):
+open class MultiItemTypeAdapter<T>(protected val context: Context,
+                                   @JvmField protected val mList: MutableList<T> = mutableListOf()):
     RecyclerView.Adapter<ViewHolder>() {
     protected val mItemViewDelegateManager = ItemViewDelegateManager<T>()
-    protected var mOnItemClickListener: OnItemClickListener<T>? = null
-    protected var mOnItemLongClickListener: OnItemLongClickListener<T>? = null
+
+    var onItemClickListener: OnItemClickListener<T>? = null
+    var onItemLongClickListener: OnItemLongClickListener<T>? = null
 
     var isItemAnimEnabled = false
 
@@ -39,13 +45,13 @@ open class MultiItemTypeAdapter<T>(val context: Context,
             return
         }
         viewHolder.convertView.setOnClickListener {
-            mOnItemClickListener?.apply {
+            onItemClickListener?.apply {
                 val position = viewHolder.bindingAdapterPosition
                 onItemClick(viewHolder, mList[position], position)
             }
         }
         viewHolder.convertView.setOnLongClickListener(View.OnLongClickListener {
-            mOnItemLongClickListener?.apply {
+            onItemLongClickListener?.apply {
                 val position = viewHolder.bindingAdapterPosition
                 return@OnLongClickListener onItemLongClick(viewHolder, mList[position], position)
             }
@@ -53,10 +59,18 @@ open class MultiItemTypeAdapter<T>(val context: Context,
         })
     }
 
+    /**
+     * @since 0.1.1 增加[CallSuper]，防止重写后没加super.onBindViewHolder()导致未回调[CommonAdapter.onBindView]
+     */
+    @CallSuper
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         onBindViewHolder(holder, position, ArrayList(0))
     }
 
+    /**
+     * @since 0.1.1 增加[CallSuper]，防止重写后没加super.onBindViewHolder()导致未回调[CommonAdapter.onBindView]
+     */
+    @CallSuper
     override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
         mItemViewDelegateManager.convert(holder, getItem(position),
                                          holder.bindingAdapterPosition, payloads)
@@ -152,10 +166,10 @@ open class MultiItemTypeAdapter<T>(val context: Context,
         }
     }
 
+    /**
+     * @since 0.1.1 取消空判断，防止本来列表是空，clear之后[EmptyAdapter]空布局不显示问题
+     */
     fun clear() {
-        if (isEmpty()) {
-            return
-        }
         val count = mList.size
         mList.clear()
         if (count > 0) {
@@ -183,14 +197,6 @@ open class MultiItemTypeAdapter<T>(val context: Context,
 
     protected fun useItemViewDelegateManager(): Boolean {
         return mItemViewDelegateManager.itemViewDelegateCount > 0
-    }
-
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListener<T>?) {
-        mOnItemClickListener = onItemClickListener
-    }
-
-    fun setOnItemLongClickListener(onItemLongClickListener: OnItemLongClickListener<T>?) {
-        mOnItemLongClickListener = onItemLongClickListener
     }
 
     interface OnItemClickListener<T> {
