@@ -8,7 +8,7 @@
 
 ```
 mavenCentral()
-implementation 'io.github.ayvytr:base-adapter:0.1.0'
+implementation 'io.github.ayvytr:base-adapter:0.1.1'
 ```
 
 
