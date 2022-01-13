@@ -8,7 +8,7 @@
 
 ```
 mavenCentral()
-implementation 'io.github.ayvytr:base-adapter:0.1.1'
+implementation 'io.github.ayvytr:base-adapter:0.1.2'
 ```
 
 
@@ -52,7 +52,9 @@ public class DataEmptyAdapter extends EmptyAdapter<Bean> {
 
 ## 更新历史
 
-* 0.1.1
+* 0.1.2
+  * 修改增加CallSuper后EmptyAdapter CI lint报错问题
+* ~~0.1.1~~
   * 删除setOnItemClickListener(), setOnItemLongClickListener()
   * 修改部分变量名称和访问权限
   * MultiItemTypeAdapter.clear() 取消空判断，防止本来列表是空，EmptyAdapter.clear()之后空布局不显示问题

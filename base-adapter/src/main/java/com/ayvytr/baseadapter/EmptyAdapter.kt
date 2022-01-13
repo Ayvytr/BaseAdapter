@@ -117,8 +117,7 @@ abstract class EmptyAdapter<T>(context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int,
                                   payloads: MutableList<Any>) {
         if (!mList.isEmpty()) {
-            mItemViewDelegateManager.convert(holder, getItem(position),
-                                             holder.bindingAdapterPosition, payloads)
+            super.onBindViewHolder(holder, position, payloads)
         } else {
             emptyViewDelegate.convert(holder)
         }
