@@ -3,9 +3,6 @@ package com.ayvytr.baseadapter
 import android.content.Context
 import androidx.annotation.LayoutRes
 
-/**
- * Created by zhy on 16/4/9.
- */
 abstract class CommonAdapter<T> @JvmOverloads constructor(context: Context,
                                                           @LayoutRes val itemLayoutId: Int,
                                                           list: MutableList<T> = mutableListOf()):

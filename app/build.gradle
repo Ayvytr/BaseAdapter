@@ -36,10 +36,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation "com.scwang.smart:refresh-layout-kernel:2.0.3"
-    implementation "com.ayvytr:logger:3.3.0"
+    implementation "io.github.scwang90:refresh-layout-kernel:2.0.5"
+    implementation "io.github.ayvytr:logger:+"
 
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:+'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 

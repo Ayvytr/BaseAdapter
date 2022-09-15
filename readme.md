@@ -8,14 +8,8 @@
 
 ```
 mavenCentral()
-implementation 'io.github.ayvytr:base-adapter:0.1.2'
+implementation 'io.github.ayvytr:base-adapter:0.1.3'
 ```
-
-
-
-~~jcenter()库废弃~~
-
-~~implementation 'com.ayvytr:base-adapter:1.4.1'~~
 
 
 
@@ -51,6 +45,9 @@ public class DataEmptyAdapter extends EmptyAdapter<Bean> {
 
 
 ## 更新历史
+
+* 0.1.3
+  * 修改ViewHolder.getView()返回值不可空
 
 * 0.1.2
   * 修改增加CallSuper后EmptyAdapter CI lint报错问题

@@ -13,7 +13,6 @@ import java.util.*
  * @since 0.1.1 删除setOnItemClickListener(), setOnItemLongClickListener()；修改部分变量名称和访问权限；
  * 修改[clear]
  * @since 0.1.0
- * Created by zhy on 16/4/9.
  */
 open class MultiItemTypeAdapter<T>(protected val context: Context,
                                    @JvmField protected val mList: MutableList<T> = mutableListOf()):

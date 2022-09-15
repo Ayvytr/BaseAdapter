@@ -2,9 +2,6 @@ package com.ayvytr.baseadapter
 
 import androidx.collection.SparseArrayCompat
 
-/**
- * Created by zhy on 16/6/22.
- */
 class ItemViewDelegateManager<T> {
     var delegates: SparseArrayCompat<ItemViewDelegate<T>> = SparseArrayCompat<ItemViewDelegate<T>>()
     val itemViewDelegateCount: Int
