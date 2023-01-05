@@ -7,18 +7,10 @@ class ItemViewDelegateManager<T> {
     val itemViewDelegateCount: Int
         get() = delegates.size()
 
-    fun addDelegate(delegate: ItemViewDelegate<T>): ItemViewDelegateManager<T> {
-        delegates.put(0, delegate)
-        return this
-    }
-
+    /**
+     * 增加view type delegate，注意：[viewType]相同，[delegate]会被覆盖.
+     */
     fun addDelegate(viewType: Int, delegate: ItemViewDelegate<T>): ItemViewDelegateManager<T> {
-        if (delegates[viewType] == null) {
-            ("An ItemViewDelegate is already registered for the viewType = "
-                    + viewType
-                    + ". Already registered ItemViewDelegate is "
-                    + delegates[viewType])
-        }
         delegates.put(viewType, delegate)
         return this
     }
