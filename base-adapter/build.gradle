@@ -1,6 +1,7 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply from: '../kotlin_maven_push.gradle'
+plugins {
+    alias(libs.plugins.android.library)
+//    id "com.vanniktech.maven.publish" version "0.35.0"
+}
 
 android {
     compileSdkVersion 30
@@ -22,9 +23,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation libs.recyclerview
 //    implementation "com.ayvytr:logger:3.3.0"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation libs.kotlin.stdlib7
 
-    dokkaJavadocPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.6.0")
 }
