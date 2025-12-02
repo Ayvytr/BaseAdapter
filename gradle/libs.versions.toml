@@ -7,6 +7,7 @@ junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.1.0"
 material = "1.10.0"
+vanniktechpublish = "0.35.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,3 +34,4 @@ scwang90-refresh-kernel = "io.github.scwang90:refresh-layout-kernel:2.0.5"
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library= { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+vanniktech-publish = { id = "com.vanniktech.maven.publish", version.ref = "vanniktechpublish" }
