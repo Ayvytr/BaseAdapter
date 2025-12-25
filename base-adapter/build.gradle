@@ -5,6 +5,7 @@ plugins {
 
 android {
     compileSdkVersion 30
+    namespace "com.ayvytr.baseadapter"
 
     defaultConfig {
         minSdkVersion 9

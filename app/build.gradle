@@ -4,6 +4,7 @@ plugins {
 
 android {
     compileSdkVersion 30
+    namespace "com.example.myapplication"
 
     defaultConfig {
         applicationId "com.example.myapplication"
