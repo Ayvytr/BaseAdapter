@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.vanniktech.publish)
+    alias(libs.plugins.dokka)
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 36
     namespace "com.ayvytr.baseadapter"
 
     defaultConfig {
