@@ -1,0 +1,1 @@
+sourceset_dependencies='{":base-adapter/debug":[],":base-adapter/main":[],":base-adapter/release":[]}'

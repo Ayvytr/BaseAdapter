@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ViewHolder</title>
+    <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="../../../index.html" tabindex="1">
+                    base-adapter
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true"
+                        data-filter=":base-adapter/main">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":base-adapter/main"
+                                       data-filter=":base-adapter/main"/>
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    base-adapter
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageIds="base-adapter::com.ayvytr.baseadapter/ViewHolder///PointingToDeclaration//-1935673098">
+  <div class="breadcrumbs"><a href="../../../index.html">base-adapter</a><span class="delimiter">/</span><a href="../index.html">com.ayvytr.baseadapter</a><span class="delimiter">/</span><span class="current">ViewHolder</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>View</span><wbr></wbr><span><span>Holder</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">ViewHolder</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">mContext<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>convertView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a></span></span><span class="token punctuation">)</span> : <a href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a></div><p class="paragraph">Created by Jason on 2018/8/14.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="-1485976972%2FConstructors%2F-1935673098" anchor-label="ViewHolder" id="-1485976972%2FConstructors%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-view-holder.html"><span>View</span><wbr></wbr><span><span>Holder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1485976972%2FConstructors%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">mContext<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">convertView<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-1866397719%2FClasslikes%2F-1935673098" anchor-label="Companion" id="-1866397719%2FClasslikes%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1866397719%2FClasslikes%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-768556362%2FProperties%2F-1935673098" anchor-label="absoluteAdapterPosition" id="-768556362%2FProperties%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-768556362%2FProperties%2F-1935673098"><span>absolute</span><wbr></wbr><span>Adapter</span><wbr></wbr><span><span>Position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-768556362%2FProperties%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html#-768556362%2FProperties%2F-1935673098">absoluteAdapterPosition</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="245788191%2FProperties%2F-1935673098" anchor-label="adapterPosition" id="245788191%2FProperties%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#245788191%2FProperties%2F-1935673098"><span>adapter</span><wbr></wbr><span><span>Position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="245788191%2FProperties%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html#245788191%2FProperties%2F-1935673098">adapterPosition</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1490539079%2FProperties%2F-1935673098" anchor-label="bindingAdapter" id="-1490539079%2FProperties%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1490539079%2FProperties%2F-1935673098"><span>binding</span><wbr></wbr><span><span>Adapter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1490539079%2FProperties%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/Nullable.html"><span class="token annotation builtin">Nullable</span></a></div></div><span class="token keyword">val </span><a href="index.html#-1490539079%2FProperties%2F-1935673098">bindingAdapter</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/RecyclerView.Adapter.html">RecyclerView.Adapter</a><span class="token operator">&lt;</span><span class="token keyword">out </span><a href="https://developer.android.com/reference/kotlin/androidx/recyclerview/widget/RecyclerView.ViewHolder.html">RecyclerView.ViewHolder</a><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="421447824%2FProperties%2F-1935673098" anchor-label="bindingAdapterPosition" id="421447824%2FProperties%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#421447824%2FProperties%2F-1935673098"><span>binding</span><wbr></wbr><span>Adapter</span><wbr></wbr><span><span>Position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="421447824%2FProperties%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html#421447824%2FProperties%2F-1935673098">bindingAdapterPosition</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1769217386%2FProperties%2F-1935673098" anchor-label="convertView" id="1769217386%2FProperties%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="convert-view.html"><span>convert</span><wbr></wbr><span><span>View</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1769217386%2FProperties%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="convert-view.html">convertView</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1703443315%2FProperties%2F-1935673098" anchor-label="isRecyclable" id="-1703443315%2FProperties%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1703443315%2FProperties%2F-1935673098"><span>is</span><wbr></wbr><span><span>Recyclable</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1703443315%2FProperties%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html#-1703443315%2FProperties%2F-1935673098">isRecyclable</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-448527947%2FProperties%2F-1935673098" anchor-label="itemId" id="-448527947%2FProperties%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-448527947%2FProperties%2F-1935673098"><span>item</span><wbr></wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-448527947%2FProperties%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html#-448527947%2FProperties%2F-1935673098">itemId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="29975211%2FProperties%2F-1935673098" anchor-label="itemView" id="29975211%2FProperties%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#29975211%2FProperties%2F-1935673098"><span>item</span><wbr></wbr><span><span>View</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="29975211%2FProperties%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/NonNull.html"><span class="token annotation builtin">NonNull</span></a></div></div><span class="token keyword">val </span><a href="index.html#29975211%2FProperties%2F-1935673098">itemView</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1393349009%2FProperties%2F-1935673098" anchor-label="itemViewType" id="1393349009%2FProperties%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1393349009%2FProperties%2F-1935673098"><span>item</span><wbr></wbr><span>View</span><wbr></wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1393349009%2FProperties%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html#1393349009%2FProperties%2F-1935673098">itemViewType</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2043565168%2FProperties%2F-1935673098" anchor-label="layoutPosition" id="2043565168%2FProperties%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#2043565168%2FProperties%2F-1935673098"><span>layout</span><wbr></wbr><span><span>Position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2043565168%2FProperties%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html#2043565168%2FProperties%2F-1935673098">layoutPosition</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1527491399%2FProperties%2F-1935673098" anchor-label="oldPosition" id="1527491399%2FProperties%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1527491399%2FProperties%2F-1935673098"><span>old</span><wbr></wbr><span><span>Position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1527491399%2FProperties%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html#1527491399%2FProperties%2F-1935673098">oldPosition</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-274067718%2FProperties%2F-1935673098" anchor-label="position" id="-274067718%2FProperties%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-274067718%2FProperties%2F-1935673098"><span><span>position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-274067718%2FProperties%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="index.html#-274067718%2FProperties%2F-1935673098">position</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1529298069%2FFunctions%2F-1935673098" anchor-label="appendText" id="1529298069%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="append-text.html"><span>append</span><wbr></wbr><span><span>Text</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1529298069%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="append-text.html"><span class="token function">appendText</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">text<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-668917243%2FFunctions%2F-1935673098" anchor-label="getView" id="-668917243%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-view.html"><span>get</span><wbr></wbr><span><span>View</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-668917243%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="get-view.html">T</a><span class="token operator"> : </span><a href="https://developer.android.com/reference/kotlin/android/view/View.html">View</a><span class="token operator">&gt; </span><a href="get-view.html"><span class="token function">getView</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="get-view.html">T</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1641890050%2FFunctions%2F-1935673098" anchor-label="linkify" id="-1641890050%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="linkify.html"><span><span>linkify</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1641890050%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="linkify.html"><span class="token function">linkify</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1021218710%2FFunctions%2F-1935673098" anchor-label="setAlpha" id="1021218710%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-alpha.html"><span>set</span><wbr></wbr><span><span>Alpha</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1021218710%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-alpha.html"><span class="token function">setAlpha</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1125251494%2FFunctions%2F-1935673098" anchor-label="setBackgroundColor" id="-1125251494%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-background-color.html"><span>set</span><wbr></wbr><span>Background</span><wbr></wbr><span><span>Color</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1125251494%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-background-color.html"><span class="token function">setBackgroundColor</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">color<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1559978473%2FFunctions%2F-1935673098" anchor-label="setBackgroundRes" id="-1559978473%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-background-res.html"><span>set</span><wbr></wbr><span>Background</span><wbr></wbr><span><span>Res</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1559978473%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-background-res.html"><span class="token function">setBackgroundRes</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/DrawableRes.html"><span class="token annotation builtin">DrawableRes</span></a> </span>backgroundRes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-767850157%2FFunctions%2F-1935673098" anchor-label="setChecked" id="-767850157%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-checked.html"><span>set</span><wbr></wbr><span><span>Checked</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-767850157%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-checked.html"><span class="token function">setChecked</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">checked<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-227054995%2FFunctions%2F-1935673098" anchor-label="setEnabled" id="-227054995%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-enabled.html"><span>set</span><wbr></wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-227054995%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-enabled.html"><span class="token function">setEnabled</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">enabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1972935629%2FFunctions%2F-1935673098" anchor-label="setImage" id="1972935629%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-image.html"><span>set</span><wbr></wbr><span><span>Image</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1972935629%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-image.html"><span class="token function">setImage</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">bitmap<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Bitmap.html">Bitmap</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-image.html"><span class="token function">setImage</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">drawable<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/drawable/Drawable.html">Drawable</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-image.html"><span class="token function">setImage</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">resId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1860912636%2FFunctions%2F-1935673098" anchor-label="setIsRecyclable" id="-1860912636%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1860912636%2FFunctions%2F-1935673098"><span>set</span><wbr></wbr><span>Is</span><wbr></wbr><span><span>Recyclable</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1860912636%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="index.html#-1860912636%2FFunctions%2F-1935673098"><span class="token function">setIsRecyclable</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">recyclable<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1098747689%2FFunctions%2F-1935673098" anchor-label="setMax" id="1098747689%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-max.html"><span>set</span><wbr></wbr><span><span>Max</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1098747689%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-max.html"><span class="token function">setMax</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">max<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-740717533%2FFunctions%2F-1935673098" anchor-label="setOnClickListener" id="-740717533%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-on-click-listener.html"><span>set</span><wbr></wbr><span>On</span><wbr></wbr><span>Click</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-740717533%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-on-click-listener.html"><span class="token function">setOnClickListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnClickListener.html">View.OnClickListener</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="526222443%2FFunctions%2F-1935673098" anchor-label="setOnLongClickListener" id="526222443%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-on-long-click-listener.html"><span>set</span><wbr></wbr><span>On</span><wbr></wbr><span>Long</span><wbr></wbr><span>Click</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="526222443%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-on-long-click-listener.html"><span class="token function">setOnLongClickListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnLongClickListener.html">View.OnLongClickListener</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-220127407%2FFunctions%2F-1935673098" anchor-label="setOnTouchListener" id="-220127407%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-on-touch-listener.html"><span>set</span><wbr></wbr><span>On</span><wbr></wbr><span>Touch</span><wbr></wbr><span><span>Listener</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-220127407%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-on-touch-listener.html"><span class="token function">setOnTouchListener</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">listener<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/view/View.OnTouchListener.html">View.OnTouchListener</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="114929767%2FFunctions%2F-1935673098" anchor-label="setProgress" id="114929767%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-progress.html"><span>set</span><wbr></wbr><span><span>Progress</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="114929767%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-progress.html"><span class="token function">setProgress</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">progress<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-progress.html"><span class="token function">setProgress</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">progress<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">max<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-454144083%2FFunctions%2F-1935673098" anchor-label="setRating" id="-454144083%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-rating.html"><span>set</span><wbr></wbr><span><span>Rating</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-454144083%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-rating.html"><span class="token function">setRating</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">rating<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-rating.html"><span class="token function">setRating</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">rating<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a><span class="token punctuation">, </span></span><span class="parameter ">max<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1454572831%2FFunctions%2F-1935673098" anchor-label="setSelected" id="-1454572831%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-selected.html"><span>set</span><wbr></wbr><span><span>Selected</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1454572831%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-selected.html"><span class="token function">setSelected</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">isSelected<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-903701673%2FFunctions%2F-1935673098" anchor-label="setTag" id="-903701673%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-tag.html"><span>set</span><wbr></wbr><span><span>Tag</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-903701673%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-tag.html"><span class="token function">setTag</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">tag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-tag.html"><span class="token function">setTag</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">tag<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1449460229%2FFunctions%2F-1935673098" anchor-label="setText" id="1449460229%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-text.html"><span>set</span><wbr></wbr><span><span>Text</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1449460229%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-text.html"><span class="token function">setText</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">text<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char-sequence/index.html">CharSequence</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-text.html"><span class="token function">setText</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/StringRes.html"><span class="token annotation builtin">StringRes</span></a> </span>textId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1005724219%2FFunctions%2F-1935673098" anchor-label="setTextColor" id="1005724219%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-text-color.html"><span>set</span><wbr></wbr><span>Text</span><wbr></wbr><span><span>Color</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1005724219%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-text-color.html"><span class="token function">setTextColor</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">textColor<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1276122729%2FFunctions%2F-1935673098" anchor-label="setTextColorRes" id="1276122729%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-text-color-res.html"><span>set</span><wbr></wbr><span>Text</span><wbr></wbr><span>Color</span><wbr></wbr><span><span>Res</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1276122729%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-text-color-res.html"><span class="token function">setTextColorRes</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/ColorRes.html"><span class="token annotation builtin">ColorRes</span></a> </span>textColorRes<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1682022081%2FFunctions%2F-1935673098" anchor-label="setTypeface" id="-1682022081%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-typeface.html"><span>set</span><wbr></wbr><span><span>Typeface</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1682022081%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-typeface.html"><span class="token function">setTypeface</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">typeface<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/graphics/Typeface.html">Typeface</a><span class="token punctuation">, </span></span><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span><span class="token keyword">vararg </span>viewIds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1933817801%2FFunctions%2F-1935673098" anchor-label="setVisible" id="-1933817801%2FFunctions%2F-1935673098" data-filterable-set=":base-adapter/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":base-adapter/main" data-filterable-set=":base-adapter/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-visible.html"><span>set</span><wbr></wbr><span><span>Visible</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1933817801%2FFunctions%2F-1935673098"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":base-adapter/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-visible.html"><span class="token function">setVisible</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span><span class="token annotation builtin">@</span><a href="https://developer.android.com/reference/kotlin/androidx/annotation/IdRes.html"><span class="token annotation builtin">IdRes</span></a> </span>viewId<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">visible<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">ViewHolder</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
